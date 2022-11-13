@@ -46,6 +46,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * A mutator for the password field, hashing it before saving.
+     * @param string $password
+     * 
+     * @return void
+     */
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = Hash::make($password);
