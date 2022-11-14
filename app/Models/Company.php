@@ -17,6 +17,9 @@ class Company extends Model
         'address'
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i'
+    ];
     /**
      * Returns the user this company belongs to
      * @return BelongsTo

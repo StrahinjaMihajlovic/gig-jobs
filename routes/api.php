@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,17 @@ use Illuminate\Support\Facades\Route;
 Route::put('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/user/', 'showProfile');
+        Route::patch('/user/update', 'updateProfile');
+    });
+
+    Route::controller(CompanyController::class)->group(function () {
+        Route::get('/companies', 'index');
+        Route::get('companies/{company}', 'show')->can('view', 'company');
+        Route::put('/companies/create', 'store');
+        Route::patch('companies/{company}/update', 'update')->can('update', 'company');
+        Route::delete('companies/{company}/delete', 'destroy')->can('delete', 'company');
+    });
 });
