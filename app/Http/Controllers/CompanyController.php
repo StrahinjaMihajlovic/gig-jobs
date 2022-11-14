@@ -83,19 +83,12 @@ class CompanyController extends Controller
             'address' => 'string|max:250'
         ]);
 
-        $updatedCompany = $this->service->updateCompany($company, $data);
+        $updatedCompany = $company->update($data);
 
-        if ($updatedCompany) {
-            return response()->json([
-                'message' => 'success',
-                'company' => $updatedCompany
-            ]);
-        } else {
-            return response()->json([
-                'message' => 'failure',
-                'company' => $company
-            ]);
-        }
+        return response()->json([
+            'message' => $updatedCompany ? 'success' : 'failure',
+            'company' => new CompanyResource($company)
+        ]);
     }
 
     /**
@@ -106,7 +99,7 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        return $company->delete() 
+        return $this->service->deleteCompany($company) 
         ? response()->json(['message' => 'success'], 200)
         : response()->json(['message' => 'success'], 500);
     }

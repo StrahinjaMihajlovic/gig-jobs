@@ -26,10 +26,11 @@ class CompanyService
 
     public function updateCompany(Company $company, $data)
     {
-        if ($company->update($data)) {
-            return new CompanyResource($company);
-        }
+       return $company->update($data);
+    }
 
-        return false;
+    public function deleteCompany(Company $company)
+    {
+       return $company->delete();
     }
 }
