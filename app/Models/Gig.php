@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Builder;
 
 class Gig extends Model
@@ -32,6 +33,15 @@ class Gig extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    /** 
+     * Returns user that owns the company owning this gig
+     * @return HasOneThrough
+     */
+    public function user(): HasOneThrough
+    {
+        return $this->hasOneThrough(User::class, Company::class, 'id', 'id', 'company_id', 'user_id');
     }
 
     public function scopeByCompanyString(Builder $query, $companyString) 
