@@ -14,7 +14,7 @@ class GigService
     public function listAllGigs($filters, $numberOfPages)
     {
         $gigs = Auth::user()->gigs();
-        
+
         foreach ($filters as $filter => $value) {
             $this->parseFilter($filter, $value, $gigs);
         }
@@ -34,6 +34,10 @@ class GigService
         
         if ($filter === 'company') {
             $gigs->ByCompanyString($value);
+        }
+
+        if ($filter === 'search_string') {
+            $gigs->bySearch($value);
         }
     }
 

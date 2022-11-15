@@ -25,9 +25,10 @@ class GigsListRequest extends FormRequest
     public function rules()
     {
         return [
-            'company' => 'string',
+            'company' => 'filled|string',
             'progress' => 'in:not_started,started,finished',
-            'status' => 'boolean'
+            'status' => 'boolean',
+            'search_string' => 'filled|string'
         ];
     }
 }

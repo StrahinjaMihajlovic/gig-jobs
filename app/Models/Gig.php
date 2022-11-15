@@ -74,5 +74,15 @@ class Gig extends Model
                 $query->orWhere('timestamp_end', '<=', $time);     
             }
         });
+
+        return $query;
+    }
+
+    public function ScopeBySearch(Builder $query, $searchString)
+    {
+        return $query->where(function (Builder $query) use ($searchString) {
+            $query->orWhere('gigs.name', 'like', "%$searchString%")
+                ->orWhere('gigs.description', 'like', "%$searchString%");
+        });
     }
 }
