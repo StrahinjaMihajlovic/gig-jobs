@@ -4,11 +4,11 @@ namespace App\Services;
 
 use App\Http\Resources\GigResource;
 use App\Models\Gig;
-use Carbon\Carbon;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
+/**
+ * A service class containing methods used by gig controllers
+ */
 class GigService 
 {
     public function listAllGigs($filters, $numberOfPages)
