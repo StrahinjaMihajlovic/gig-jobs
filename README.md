@@ -44,4 +44,4 @@ The most out of the box set up can be done via the [Laravel Sail](https://larave
 - If you can access the API home page with your browser, \then the API is up and running.
 
 
-Have fun and \for more info, please look at the API documentation.
+Have fun and \for more info, please look at the [API documentation](https://documenter.getpostman.com/view/24493270/2s8YmPsMeM).
