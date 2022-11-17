@@ -15,7 +15,7 @@ class GigController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
+     * @param  GigsCreateRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function index(GigsListRequest $request)
@@ -30,7 +30,7 @@ class GigController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  GigsCreateRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(GigsCreateRequest $request)
