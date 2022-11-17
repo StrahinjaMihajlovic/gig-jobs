@@ -45,3 +45,6 @@ The most out of the box set up can be done via the [Laravel Sail](https://larave
 
 
 Have fun and \for more info, please look at the [API documentation](https://documenter.getpostman.com/view/24493270/2s8YmPsMeM).
+
+Sincerely, 
+Strahinja Mihajlovic
