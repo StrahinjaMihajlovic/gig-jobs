@@ -6,6 +6,9 @@ use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * A service class containing methods for serving the company controller
+ */
 class CompanyService 
 {
     public function listUserCompanies($pageSize)

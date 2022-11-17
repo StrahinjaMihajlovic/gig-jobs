@@ -52,7 +52,7 @@ class CompanyController extends Controller
         } else {
 
             return response()->json([
-                'message' => 'failure',
+                'message' => 'failed',
             ], 500);
         }
     }
@@ -86,9 +86,9 @@ class CompanyController extends Controller
         $updatedCompany = $company->update($data);
 
         return response()->json([
-            'message' => $updatedCompany ? 'success' : 'failure',
+            'message' => $updatedCompany ? 'success' : 'failed',
             'company' => new CompanyResource($company)
-        ]);
+        ], $updatedCompany ? 200 : 500);
     }
 
     /**
@@ -101,6 +101,6 @@ class CompanyController extends Controller
     {
         return $this->service->deleteCompany($company) 
         ? response()->json(['message' => 'success'], 200)
-        : response()->json(['message' => 'success'], 500);
+        : response()->json(['message' => 'failed'], 500);
     }
 }
