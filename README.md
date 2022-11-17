@@ -7,58 +7,46 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## About Upshift challenge:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This project was made for the technical challenge of the Upshift company. It is a classical REST API providing clients CRUD access for managing their companies and gigs. Authentication is [Laravel Sanctum](https://laravel.com/docs/8.x/sanctum), which came with the default Laravel installation and is providing token authentication for the API.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Starting the API:
+The most out of the box set up can be done via the [Laravel Sail](https://laravel.com/docs/8.x/sail), which uses needed containers for the application, which are defined in this [file](/docker-compose.yml). 
+> Laravel Sail uses [Docker engine](https://docs.docker.com/engine/install/) and [Docker-compose](https://docs.docker.com/compose/) for building containers, make sure you have installed them before proceeding.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- If the default configuration of to-be-made containers looks good to you, before you build them, please make sure you have made a copy of a given example [.env](/.env/.example) file and renaming it to .env. The default settings can be left if you haven't changed the previously mentioned docker-compose YAML file.
+> Before continuing further, please shut down the processes listening on ports: 80, 3306 and 6379 (if you haven't changed the default ports on containers), so the newly build containers can listen to mentioned ports.
+- Firstly, make composer install needed vendor files with:
+~~~bash 
+    cd /{project-path}/
+    composer install
+~~~~
+- To build containers, you will need the next command:
+~~~bash
+    cd /{project-path}/
+    (sudo) ./vendor/bin/sail up -d
+~~~~
+> Note: sudo may not be needed \\if you installed the Docker as a [non-root user](https://docs.docker.com/engine/install/linux-postinstall/\#manage-docker-as-a-non-root-user)
 
-## Learning Laravel
+> If the containers were successfully built and ran, you can access the app with the url [http://localhost](http://localhost)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- After the containers were built, you need to generate the key \\for the API with:
+~~~bash
+(sudo) ./vendor/bin/sail artisan key:generate
+~~~
+- To run migrations \\for your Database, use this \command:
+~~~bash
+(sudo) ./vendor/bin/sail artisan migrate
+~~~
+> You can add --seed parameter to the command above, which will populate your DB with a randomly generated data of 10.000 users, with every user having a company or two and every company having 2 to 5 gigs. Note, this can take a long time to execute, use only if necessary.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- If you can access the API home page with your browser, \then the API is up and running.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Have fun and \for more info, please look at the [API documentation](https://documenter.getpostman.com/view/24493270/2s8YmPsMeM).
 
-### Premium Partners
+Discussion about the optimization can be found on file [GigService, line 27](/app/Services/GigService.php) and [PostRate.php, line 37](/app/Console/Commands/PostRate.php)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Sincerely, 
+Strahinja Mihajlovic
