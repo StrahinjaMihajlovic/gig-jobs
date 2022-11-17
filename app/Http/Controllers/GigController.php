@@ -52,7 +52,7 @@ class GigController extends Controller
         } else {
 
             return response()->json([
-                'message' => 'failure',
+                'message' => 'failed',
             ], 500);
         }
     }
@@ -83,7 +83,7 @@ class GigController extends Controller
         $updatedGig = $this->service->updateGig($data, $dates, $company, $gig);
 
         return response()->json([
-            'message' => $updatedGig ? 'success' : 'failure',
+            'message' => $updatedGig ? 'success' : 'failed',
             'gig' => new GigResource($gig)
         ], $updatedGig ? 200 : 500);
     }
@@ -97,7 +97,7 @@ class GigController extends Controller
     public function destroy(Gig $gig)
     {
         return response()->json([
-            'message' => $gig->delete() ? 'success' : 'failure'
+            'message' => $gig->delete() ? 'success' : 'failed'
         ]);
     }
 }
