@@ -6,10 +6,8 @@ use App\Http\Requests\Gigs\GigsCreateRequest;
 use App\Http\Requests\Gigs\GigsListRequest;
 use App\Http\Requests\Gigs\GigsUpdateRequest;
 use App\Http\Resources\GigResource;
-use App\Models\Company;
 use App\Models\Gig;
 use App\Services\GigService;
-use Illuminate\Http\Request;
 
 class GigController extends Controller
 {
