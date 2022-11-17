@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Resources\GigResource;
 use App\Models\Gig;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -22,6 +23,25 @@ class GigService
         return $gigs->paginate($numberOfPages);
     }
 
+    /**
+     * Applies wanted filters to the gigs queries.
+     * Discussion of efficiency: Since this function applies only where clauses
+     * with different params on the non trivial fields, the execute time can be improved,
+     * especially for the textual fields, by adding the appropriate type of indexes
+     * on (or just some of) columns 'status', 'timestamp_start', 'timestamp_end', 'name' and 'description'
+     * on the gigs columns. Since this will sort the dataset and make the search easier for
+     * the DB system. Needs to be analized which indexes brings the most performances, since
+     * adding an index impacts negatively the perfomance on DB writes.
+     * Another solution would be using some third party service or app which specialize
+     * on searching datasets, e.g ElasticSearch which will do most of heavy lifting
+     * with searching and just return needed keys which DB can use to pull the related
+     * rows without applying filters itself.
+     * @param str $filter
+     * @param str $value
+     * @param Collection $gigs
+     * 
+     * @return void
+     */
     protected function parseFilter($filter, $value, &$gigs) 
     {
         if ($filter === 'progress') {
