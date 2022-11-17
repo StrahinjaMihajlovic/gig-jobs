@@ -20,6 +20,8 @@ class GigResource extends JsonResource
             'number_of_positions' => $this->number_of_positions,
             'pay_per_hour' => $this->pay_per_hour,
             'status' => $this->status ? 'posted' : 'draft',
+            'time_started' => $this->timestamp_start,
+            'time_ending' => $this->timestamp_end,
             'company' => $this->company->name
         ];
     }
