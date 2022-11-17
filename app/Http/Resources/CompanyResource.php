@@ -18,7 +18,9 @@ class CompanyResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'address' => $this->address,
-            'created' => $this->created_at
+            'created' => $this->created_at,
+            'number_of_posted_gigs' => $this->gigs()->ByStatus(1)->count(),
+            'number_of_started_gigs' => $this->gigs()->ByProgress('started')->count()
         ];
     }
 }

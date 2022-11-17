@@ -6,10 +6,8 @@ use App\Http\Requests\Gigs\GigsCreateRequest;
 use App\Http\Requests\Gigs\GigsListRequest;
 use App\Http\Requests\Gigs\GigsUpdateRequest;
 use App\Http\Resources\GigResource;
-use App\Models\Company;
 use App\Models\Gig;
 use App\Services\GigService;
-use Illuminate\Http\Request;
 
 class GigController extends Controller
 {
@@ -17,7 +15,7 @@ class GigController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
+     * @param  GigsCreateRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function index(GigsListRequest $request)
@@ -32,7 +30,7 @@ class GigController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  GigsCreateRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(GigsCreateRequest $request)
@@ -52,7 +50,7 @@ class GigController extends Controller
         } else {
 
             return response()->json([
-                'message' => 'failure',
+                'message' => 'failed',
             ], 500);
         }
     }
@@ -83,7 +81,7 @@ class GigController extends Controller
         $updatedGig = $this->service->updateGig($data, $dates, $company, $gig);
 
         return response()->json([
-            'message' => $updatedGig ? 'success' : 'failure',
+            'message' => $updatedGig ? 'success' : 'failed',
             'gig' => new GigResource($gig)
         ], $updatedGig ? 200 : 500);
     }
@@ -97,7 +95,7 @@ class GigController extends Controller
     public function destroy(Gig $gig)
     {
         return response()->json([
-            'message' => $gig->delete() ? 'success' : 'failure'
+            'message' => $gig->delete() ? 'success' : 'failed'
         ]);
     }
 }
